@@ -1,12 +1,17 @@
 import '../style/custom.css'
 import React from 'react';
 import {render} from 'react-dom';
+import {createStore} from 'redux';
 import App from './App';
+import expenseApp from './reducers';
+import {addExpense, removeExpense, resetExpenses} from './actions';
 
-const data = [
-  {item: 'Milk', amount: 1.9},
-  {item: 'Bananas', amount: 1.2},
-  {item: 'Kitkat Share Pack', amount: 5.59}
-];
+const store = createStore(expenseApp);
 
-render(<App title="My Foo" data={data} />, document.getElementById('app'));
+// console.log(store.getState());
+
+// store.subscribe(() => 
+//   console.log(store.getState())
+// );
+
+render(<App title="My Expenses" store={store} />, document.getElementById('app'));
