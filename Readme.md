@@ -7,7 +7,6 @@ Demo: https://expensely.herokuapp.com/
 - React, Babel
 - Webpack
 - Static backend (for now)
-- Heroku (eventually)
 
 ## Boilerplate (app)
 
