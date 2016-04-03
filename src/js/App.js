@@ -44,7 +44,7 @@ export class InputField extends React.Component {
           <form className="form" onSubmit={e => this.formSubmit(e)}>
             <div className={formGroupClass}>
               <div className="input-group">
-                <input type="text" className="form-control" ref="input" placeholder="e.g. Milk 2$"/>
+                <input type="text" className="form-control" ref="input" placeholder="e.g. Milk 1.95"/>
                 <span className="input-group-btn">
                   <button type="submit" className="btn btn-primary">Enter</button>
                 </span>
