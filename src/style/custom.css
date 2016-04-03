@@ -1,3 +1,46 @@
+body {
+  font-size: 20px;
+}
+
+.form-control, .btn {
+  font-size: 18px;
+  height: 40px;
+}
+
+.title {
+  margin-bottom: 18px;
+}
+
 #app {
   max-width: 600px;
+}
+
+ul.expense-history {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.expense-list {
+  padding: 0 5px;
+}
+
+.expense-list .row {
+  margin-bottom: 10px;
+}
+
+.summary-amount, .row-amount {
+  text-align: right;
+}
+
+.row-action {
+  padding-left: 12px;
+  color: #286090;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.row-action:hover {
+  color: #A94442;
 }
