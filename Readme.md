@@ -51,11 +51,11 @@ module.exports = {
 }
 ```
 
-### 2. Milligram
+### 2. CSS
 
-- minimalist CSS framework, lighweight alternative to Bootstrap?
-- no time to figure out how to handle via Webpack, just use CDN
-- why that fetish to bundle *everything* anyway?
+- `npm install css-loader style-loader --save-dev`
+- Used only for custom css styles
+- No module for bootstrap that doesn't suck, just load from CDN
 
 ### 3. React
 
