@@ -28,7 +28,7 @@ export default class App extends React.Component {
   }
 }
 
-class InputField extends React.Component {
+export class InputField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {valid: true};
@@ -59,7 +59,6 @@ class InputField extends React.Component {
     e.preventDefault();
     const [item, amount, err] = parseInput(this.refs.input.value);
     if (err) {
-      console.log(err);
       this.setState({valid: false});
     } else {
       this.setState({valid: true});
@@ -70,7 +69,7 @@ class InputField extends React.Component {
   }
 }
 
-class ExpenseList extends React.Component {
+export class ExpenseList extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -84,7 +83,7 @@ class ExpenseList extends React.Component {
   }
 }
 
-class SummaryRow extends React.Component {
+export class SummaryRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,7 +119,7 @@ class SummaryRow extends React.Component {
   }
 }
 
-class ExpenseHistory extends React.Component {
+export class ExpenseHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {expenses: props.store.getState().expenses};
@@ -149,7 +148,7 @@ class ExpenseHistory extends React.Component {
   }
 }
 
-class HistoryRow extends React.Component {
+export class HistoryRow extends React.Component {
   constructor(props) {
     super(props);
   }

@@ -72,3 +72,33 @@ module.exports = {
 
 - Just a static express server for Heroku
 - No persistent storage, can add later
+
+### 6. Jest
+
+- Test framework by Facebook (for React?)
+- `npm install jest-cli babel-polyfill babel-jest --save-dev`
+- Locate tests in spec dir, exclude React from mocking
+- Add to `package.json`:
+
+```js
+{
+//...
+  "jest": {
+    "testDirectoryName": "spec",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils"
+    ]
+  },
+//...
+}
+```
+
+- Create `.babelrc`:
+
+```js
+{
+  "presets": ["es2015", "react"]
+}
+```
