@@ -1,10 +1,12 @@
 # React Expense Tracker
 
+Demo: https://expensely.herokuapp.com/
+
 ## Tech Stack
 
 - React, Babel
 - Webpack
-- No backend (for now)
+- Static backend (for now)
 - Heroku (eventually)
 
 ## Boilerplate (app)
@@ -55,9 +57,19 @@ module.exports = {
 
 - `npm install css-loader style-loader --save-dev`
 - Used only for custom css styles
-- No module for bootstrap that doesn't suck, just load from CDN
+- No module for Bootstrap that doesn't suck, just load via `<link>` from CDN
 
 ### 3. React
 
 - `npm install react react-dom react-addons-test-utils --save-dev`
-- We'll need `react-addons-test-util` later
+- We'll need `react-addons-test-utils` later
+
+### 4. Redux
+
+- First attempt using Redux, so bear with me
+- `npm install redux --save-dev`
+
+### 5. Backend
+
+- Just a static express server for Heroku
+- No persistent storage, can add later
