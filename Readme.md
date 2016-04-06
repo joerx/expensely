@@ -102,3 +102,8 @@ module.exports = {
   "presets": ["es2015", "react"]
 }
 ```
+
+### 6.2 House Keeping
+
+- Some restructuring to accomodate backend code
+- Move all frontend code into `public/`

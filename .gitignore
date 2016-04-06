@@ -34,4 +34,4 @@ jspm_packages
 .node_repl_history
 
 # Build output
-bundle.js
+public/bundle.js

@@ -1,8 +1,10 @@
+var path = require('path');
+
 module.exports = {
-  entry: './src/js/index.js', // entry point
+  entry: './public/src/js/index.js', // entry point
   devtool: 'inline-source-map', // source mapping
   output: {
-    path: __dirname, // dist
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
   module: {
@@ -12,7 +14,7 @@ module.exports = {
         loader: 'style!css'
       },
       {
-        test: /\.js$/, 
+        test: /public\/src\/.*\.js$/, 
         loader: 'babel', 
         query: {presets: ['react', 'es2015']},
         exclude: /node_modules/

@@ -18,7 +18,7 @@
     "redux"
   ],
   "jest": {
-    "testDirectoryName": "spec",
+    "testDirectoryName": "spec/frontend",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",

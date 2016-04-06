@@ -1,13 +1,13 @@
 'use strict';
 
-jest.unmock('../src/js/App'); // components we wan't to test
-jest.unmock('../src/js/actions'); // simpler to test if we use real actions
+jest.unmock('../../public/src/js/App'); // components we want to test
+jest.unmock('../../public/src/js/actions'); // simpler to test if we use real actions
 
 // a few more imports and this stuff starts looking like Java
-import React from 'react'
-import ReactDOM from 'react-dom'
-import TestUtils from 'react-addons-test-utils'
-import {InputField} from '../src/js/App'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import {InputField} from '../../public/src/js/App';
 
 describe('InputField', () => {
 
