@@ -8,7 +8,7 @@
     "test": "jest",
     "start": "node server.js",
     "build": "webpack",
-    "dev-server": "webpack-dev-server --inline",
+    "dev-server": "webpack-dev-server --inline --content-base=public/",
     "postinstall": "webpack"
   },
   "keywords": [
