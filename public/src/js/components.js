@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {addExpense, removeExpense, resetExpenses} from './actions';
 import printf from 'printf';
 
@@ -13,54 +14,18 @@ function ucfirst(str) {
   return str[0].toUpperCase() + str.substr(1, str.length);
 }
 
-// Containers
-// manages listing & removing expenses 
-class ExpenseHistoryContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props.store.getState();
-    props.store.subscribe(_ => 
-      this.setState(props.store.getState())
-    );
-  }
-  render() {
-    return (<ExpenseList 
-      expenses={this.state.expenses} 
-      total={this.state.total}
-      onItemDelete={id => this.dispatchItemDelete(id)} 
-      onHistoryReset={_ => this.dispatchHistoryReset() }/>
-    );
-  }
-  dispatchItemDelete(id) {
-    this.props.store.dispatch(removeExpense(id));
-  }
-  dispatchHistoryReset() {
-    this.props.store.dispatch(resetExpenses());
-  }
-}
 
-// manages creating new expenses
-class AddExpense extends React.Component {
-  render() {
-    return <InputField onSubmit={item => this.dispatchAddExpense(item)} />
-  }
-  dispatchAddExpense({item, amount}) {
-    this.props.store.dispatch(addExpense(item, amount));
-  }
-}
-
-// App, presentational, renders everything else
-export class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1 className="title">{this.props.title}</h1>
-        <AddExpense store={this.props.store} />
-        <ExpenseHistoryContainer store={this.props.store} />
-      </div>
-    )
-  }
-}
+// List of expenses - display and manipulation of history
+// - total: number
+// - expenses: array[expense]
+// - onHistoryItemDelete: fn()
+// - onHistoryReset: fn()
+const ExpenseList = ({total, expenses, onHistoryReset, onItemDelete}) => (
+  <section className="expense-list">
+    <SummaryRow amount={total} onReset={onHistoryReset} />
+    <ExpenseHistory expenses={expenses} onItemDelete={onItemDelete} />
+  </section>
+)
 
 // Presentational component 
 // - onSubmit: fn({item, amount})
@@ -116,18 +81,6 @@ export class InputField extends React.Component {
   }
 }
 
-// List of expenses - display and manipulation of history
-// - total: number
-// - expenses: array[expense]
-// - onHistoryItemDelete: fn()
-// - onHistoryReset: fn()
-const ExpenseList = ({total, expenses, onHistoryReset, onItemDelete}) => (
-  <section className="expense-list">
-    <SummaryRow amount={total} onReset={onHistoryReset} />
-    <ExpenseHistory expenses={expenses} onItemDelete={onItemDelete} />
-  </section>
-)
-
 // Summary row, presentational 
 // - amount: number
 // - onResetClicked: fn()
@@ -170,3 +123,31 @@ const HistoryRow = ({item, amount, onDelete}) => (
     </div>
   </div>
 );
+
+const AddExpense = connect(
+  state => state,
+  dispatch => ({
+    onSubmit: ({item, amount}) => dispatch(addExpense(item, amount))
+  })
+)(InputField);
+
+const ExpenseHistoryContainer = connect(
+  state => state,
+  dispatch => ({
+    onItemDelete: id => dispatch(removeExpense(id)),
+    onHistoryReset: _ => dispatch(resetExpenses())
+  })
+)(ExpenseList);
+
+// App, presentational, renders everything else
+export class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1 className="title">{this.props.title}</h1>
+        <AddExpense store={this.props.store} />
+        <ExpenseHistoryContainer store={this.props.store} />
+      </div>
+    )
+  }
+}
