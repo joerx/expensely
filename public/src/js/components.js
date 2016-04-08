@@ -50,7 +50,7 @@ class AddExpense extends React.Component {
 }
 
 // App, presentational, renders everything else
-export default class App extends React.Component {
+export class App extends React.Component {
   render() {
     return (
       <div>
@@ -69,6 +69,7 @@ export class InputField extends React.Component {
     super(props);
     this.state = {valid: true};
   }
+
   render() {
     const formGroupClass = [
       'form-group', 
@@ -120,90 +121,52 @@ export class InputField extends React.Component {
 // - expenses: array[expense]
 // - onHistoryItemDelete: fn()
 // - onHistoryReset: fn()
-export class ExpenseList extends React.Component {
-  render() {
-    return (
-      <section className="expense-list">
-        <SummaryRow 
-          amount={this.props.total}
-          onReset={_ => this.props.onHistoryReset()} />
-        <ExpenseHistory 
-          expenses={this.props.expenses}
-          onItemDelete={id => this.props.onItemDelete(id)} />
-      </section>
-    )
-  }
-}
+const ExpenseList = ({total, expenses, onHistoryReset, onItemDelete}) => (
+  <section className="expense-list">
+    <SummaryRow amount={total} onReset={onHistoryReset} />
+    <ExpenseHistory expenses={expenses} onItemDelete={onItemDelete} />
+  </section>
+)
 
 // Summary row, presentational 
 // - amount: number
 // - onResetClicked: fn()
-export class SummaryRow extends React.Component {
-  render() {
-    return (
-      <div className="row summary-row">
-        <div className="col col-md-8">
-          <span className="summary-label">
-            Total so far:
-          </span>
-        </div>
-        <div className="col col-md-4 summary-amount">
-          <span>
-            {printf('%.2f S$', this.props.amount)}
-          </span>
-          <a className="row-action" onClick={_ => this.resetClicked()}>
-            <span className="glyphicon glyphicon-refresh"/>
-          </a>
-        </div>
-      </div>
-    )
-  }
-  resetClicked() {
-    confirm('Are you sure?') && this.props.onReset()
-  }
-}
+const SummaryRow = ({onReset, amount}) => (
+  <div className="row summary-row">
+    <div className="col col-md-8">
+      <span className="summary-label">Total so far:</span>
+    </div>
+    <div className="col col-md-4 summary-amount">
+      <span>{printf('%.2f S$', amount)}</span>
+      <a className="row-action" onClick={_ => confirm('Are you sure?') && onReset()}>
+        <span className="glyphicon glyphicon-refresh"/>
+      </a>
+    </div>
+  </div>
+)
 
 // List of expenses
 // - expenses: array[expense]
 // - onHistoryItemDelete: fn(id)
-export class ExpenseHistory extends React.Component {
-  render() {
-    const list = this.props.expenses.map((e, idx) => {
-      const id = this.props.expenses.indexOf(e);
-      return (
-        <HistoryRow key={id} amount={e.amount}
-          onDelete={_ => this.props.onItemDelete(id)}>
-          {e.item}
-        </HistoryRow>)
-      })
-    return (
-      <section className="expense-history">
-        {list}
-      </section>
-    )
-  }
+const ExpenseHistory = ({expenses, onItemDelete}) => {
+  const list = expenses.map((e, idx) => (
+    <HistoryRow key={idx} amount={e.amount} item={e.item} onDelete={_ => onItemDelete(idx)} />
+  ));
+  return (<section className="expense-history">{list}</section>)
 }
 
 // Single expense
 // - onDelete()
-export class HistoryRow extends React.Component {
-  render() {
-    return (
-      <div className="row history-row">
-        <div className="col col-md-8">
-          <span className="row-label">
-            {ucfirst(this.props.children)}
-          </span>
-        </div>
-        <div className="col col-md-4 row-amount">
-          <span>
-            {printf('%.2f S$', this.props.amount)}
-          </span>
-          <a className="row-action" onClick={_ => this.props.onDelete()}>
-            <span className="glyphicon glyphicon-remove"/>
-          </a>
-        </div>
-      </div>
-    )
-  }
-}
+const HistoryRow = ({item, amount, onDelete}) => (
+  <div className="row history-row">
+    <div className="col col-md-8">
+      <span className="row-label">{ucfirst(item)}</span>
+    </div>
+    <div className="col col-md-4 row-amount">
+      <span>{printf('%.2f S$', amount)}</span>
+      <a className="row-action" onClick={onDelete}>
+        <span className="glyphicon glyphicon-remove"/>
+      </a>
+    </div>
+  </div>
+);
