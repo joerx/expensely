@@ -56,7 +56,7 @@ export class InputField extends React.Component {
 
     return (
       <section className="row">
-        <div className="col col-md-12">
+        <div className="col col-xs-12">
           <form className="form" onSubmit={validate}>
             <div className={formGroupClass}>
               <div className="input-group">
@@ -86,10 +86,10 @@ export class InputField extends React.Component {
 // - onResetClicked: fn()
 const SummaryRow = ({onReset, amount}) => (
   <div className="row summary-row">
-    <div className="col col-md-8">
+    <div className="col col-xs-7 col-md-9">
       <span className="summary-label">Total so far:</span>
     </div>
-    <div className="col col-md-4 summary-amount">
+    <div className="col col-xs-5 col-md-3 summary-amount">
       <span>{printf('%.2f S$', amount)}</span>
       <a className="row-action" onClick={_ => confirm('Are you sure?') && onReset()}>
         <span className="glyphicon glyphicon-refresh"/>
@@ -112,10 +112,10 @@ const ExpenseHistory = ({expenses, onItemDelete}) => {
 // - onDelete()
 const HistoryRow = ({item, amount, onDelete}) => (
   <div className="row history-row">
-    <div className="col col-md-8">
+    <div className="col col-xs-7 col-md-8">
       <span className="row-label">{ucfirst(item)}</span>
     </div>
-    <div className="col col-md-4 row-amount">
+    <div className="col col-xs-5 col-md-4 row-amount">
       <span>{printf('%.2f S$', amount)}</span>
       <a className="row-action" onClick={onDelete}>
         <span className="glyphicon glyphicon-remove"/>
