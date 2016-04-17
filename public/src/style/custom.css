@@ -1,46 +1,26 @@
 body {
-  font-size: 20px;
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
 }
-
-.form-control, .btn {
-  font-size: 18px;
-  height: 40px;
+.container {
+  max-width: 500px;
 }
-
 .title {
   margin-bottom: 18px;
+  font-weight: 100;
 }
-
-#app {
-  max-width: 600px;
+.input-form {
+  margin-bottom: 18px;
 }
-
-ul.expense-history {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.expense-summary .expense-row {
+  font-size: 18px;
+  margin-bottom: 15px;
 }
-
-
-.expense-list {
-  padding: 0 5px;
+.expense-row {
+  margin: 0 3px 10px 3px;
 }
-
-.expense-list .row {
-  margin-bottom: 10px;
-}
-
-.summary-amount, .row-amount {
-  text-align: right;
-}
-
-.row-action {
-  padding-left: 12px;
-  color: #286090;
-  vertical-align: middle;
+.expense-row a {
   cursor: pointer;
-}
-
-.row-action:hover {
-  color: #A94442;
+  margin: 0 6px;
+  vertical-align: middle;
 }
