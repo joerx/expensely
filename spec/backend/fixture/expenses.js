@@ -3,13 +3,7 @@
 const moment = require('moment');
 const uuid = require('uuid');
 
-const loadExpenses = module.exports = (db) => {
-  const table = db('expenses');
-  const data = mkData();
-  return () => table.truncate().then(() => table.insert(data));
-}
-
-function mkData() {
+module.exports = function mkExpenses() {
   const year = moment().subtract(1, 'year').year();
   const rows = [];
 

@@ -35,3 +35,8 @@ jspm_packages
 
 # Build output
 public/bundle.js
+
+.setenv-*
+
+# Sublime workspace file
+*.sublime-workspace

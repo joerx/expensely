@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test-frontend": "jest",
+    "test-backend": "mocha spec/backend",
     "start": "node server.js",
     "build": "webpack",
     "dev-server": "webpack-dev-server --inline --content-base=public/",
@@ -35,6 +36,7 @@
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "css-loader": "^0.23.1",
     "jest-cli": "^0.10.0",
     "mocha": "^3.1.2",
@@ -50,6 +52,7 @@
   },
   "dependencies": {
     "express": "^4.13.4",
+    "http-errors": "^1.5.0",
     "knex": "^0.12.6",
     "moment": "^2.15.1",
     "pg": "^6.1.0",
