@@ -7,10 +7,9 @@
   "scripts": {
     "test-frontend": "jest",
     "test-backend": "mocha spec/backend",
-    "start": "node server.js",
     "build": "webpack",
-    "dev-server": "webpack-dev-server --inline --content-base=public/",
-    "postinstall": "webpack"
+    "api-server": "node api-server.js",
+    "dev-server": "webpack-dev-server --content-base=public/"
   },
   "keywords": [
     "webpack",
@@ -51,10 +50,12 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.13.4",
     "http-errors": "^1.5.0",
     "knex": "^0.12.6",
     "moment": "^2.15.1",
+    "morgan": "^1.7.0",
     "pg": "^6.1.0",
     "uuid": "^2.0.3"
   },
