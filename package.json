@@ -7,6 +7,8 @@
   "scripts": {
     "test-frontend": "jest",
     "test-backend": "mocha spec/backend",
+    "migrate": "knex --cwd app/ migrate:latest",
+    "seed": "knex --cwd app/ seed:run",
     "build": "webpack",
     "api-server": "node api-server.js",
     "dev-server": "webpack-dev-server --content-base=public/"

@@ -25,7 +25,7 @@ module.exports = {
     // Proxy API calls, API server must be running on localhost:3000
     // You can run it in Vagrant/Docker, just forward ports accordingly
     proxy: {
-      '/api': {
+      '/api*': {
         target: 'http://localhost:3000',
         secure: false
       }
