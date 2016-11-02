@@ -143,6 +143,13 @@ describe('expenses store', () => {
       return expect(expenses.insert(data))
         .to.be.rejectedWith(error.BadRequest, /amount must be a number/i);
     });
+
+    it('should not accept an amount that is not a number', () => {
+      let data = Object.assign({}, expense);
+      data.amount = 'zero';
+      return expect(expenses.insert(data))
+        .to.be.rejectedWith(error.BadRequest, /amount must be a number/i);
+    });
   });
 
 });
