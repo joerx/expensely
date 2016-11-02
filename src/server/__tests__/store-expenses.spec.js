@@ -3,8 +3,8 @@
 const knex = require('knex');
 const moment = require('moment');
 const error = require('http-errors');
-const store = require('../../app/store/expenses');
-const config = require('../../app/configure');
+const store = require('../store/expenses');
+const config = require('../configure');
 
 const expect = require('./helpers/chai').expect;
 const mkExpenses = require('./fixture/expenses');

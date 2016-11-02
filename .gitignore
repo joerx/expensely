@@ -34,7 +34,7 @@ jspm_packages
 .node_repl_history
 
 # Build output
-public/bundle.js
+dist/
 
 .setenv-*
 

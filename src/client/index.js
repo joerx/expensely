@@ -1,4 +1,4 @@
-import '../style/custom.css'
+import './styles/custom.css'
 
 import React from 'react';
 import {render} from 'react-dom';
@@ -7,14 +7,13 @@ import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import {fetchExpenses} from './actions';
-
 import {App} from './containers';
-import expenseApp from './reducers';
+import reducers from './reducers';
 
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-  expenseApp, 
+  reducers, 
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware

@@ -1,10 +1,10 @@
 var path = require('path');
 
 module.exports = {
-  entry: './public/src/js/index.js', // entry point
+  entry: './src/client/index.js', // entry point
   devtool: 'inline-source-map', // source mapping
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   module: {
@@ -14,7 +14,7 @@ module.exports = {
         loader: 'style!css'
       },
       {
-        test: /public\/src\/.*\.js$/, 
+        test: /src\/client\/.*\.js$/, 
         loader: 'babel', 
         query: {presets: ['react', 'es2015']},
         exclude: /node_modules/
@@ -25,7 +25,7 @@ module.exports = {
     // Proxy API calls, API server must be running on localhost:3000
     // You can run it in Vagrant/Docker, just forward ports accordingly
     proxy: {
-      '/api*': {
+      '/api': {
         target: 'http://localhost:3000',
         secure: false
       }
