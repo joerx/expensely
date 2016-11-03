@@ -19,7 +19,7 @@ const lastYear = moment().subtract(1, 'year').year();
 // Default page size: 50
 // Max page size: 100
 
-describe('expenses store', () => {
+describe('Expenses store', () => {
 
   const db = knex(config.db);
   const expenses = store(db);
