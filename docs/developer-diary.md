@@ -114,6 +114,8 @@ module.exports = {
 - Vagrant box based on Debian 8 (Jessie)
 - Mocha tests
 - Knex.js as query builder (also allows migrations)
+- Nothing special done it before
+- No big deal with PostGres, seems to be faster in tests
 
 ## 8. Frontend + Backend
 
@@ -122,3 +124,17 @@ module.exports = {
 - Webpack should not be run inside Vagrant (slow, synced folder problems)
 - Backend must run in Vagrant (needs Postgres)
 - Result: api-server in vagrant, forward ports, webpack-server proxy to http://localhost:3000/api
+
+## 9. Frontend Testing
+
+- Had an earlier setup which was completely outdated after a few weeks
+- Some major restructuring of project layout, following https://github.com/RisingStack/react-way-getting-started
+- Clean separation frontend/backend, src and dist files
+- Keep tests closer to related source files, reduces cascading '../../../path/to/source'
+- Testing redux: http://redux.js.org/docs/recipes/WritingTests.html
+
+### 9.1 Action Creators
+
+- Easiest to test
+- Pure functions, deterministic out for given in, no side effects
+- No dependencies

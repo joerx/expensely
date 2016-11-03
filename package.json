@@ -20,7 +20,9 @@
     "redux"
   ],
   "jest": {
-    "testDirectoryName": "spec/frontend"
+    "testPathDirs": [
+      "./src/client"
+    ]
   },
   "author": "",
   "license": "ISC",
