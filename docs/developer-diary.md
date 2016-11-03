@@ -138,3 +138,17 @@ module.exports = {
 - Easiest to test
 - Pure functions, deterministic out for given in, no side effects
 - No dependencies
+
+### 9.2 Async Action Creators
+
+- More complex
+- Have side effects (HTTP calls)
+- Mock store to verify expected actions (https://github.com/arnaudbenard/redux-mock-store)
+- Mock http requests using nock
+- Still relatively nice to test since dispatch mechanism has loose coupling between action & store
+- Only test the behaviour of the action chain, nothing else
+
+Problems:
+
+- Apparently nock as described in (http://redux.js.org/docs/recipes/WritingTests.html) does not work
+- Trying fetch-mock (https://github.com/wheresrhys/fetch-mock) - won't work with isomorphic-fetch
