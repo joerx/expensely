@@ -150,5 +150,6 @@ module.exports = {
 
 Problems:
 
-- Apparently nock as described in (http://redux.js.org/docs/recipes/WritingTests.html) does not work
-- Trying fetch-mock (https://github.com/wheresrhys/fetch-mock) - won't work with isomorphic-fetch
+- Apparently nock as described in (http://redux.js.org/docs/recipes/WritingTests.html) doesn't work
+- Works with fetch-mock (https://github.com/wheresrhys/fetch-mock)
+- Must change `import fetch from 'isomorphic-fetch'` to `import isomorphic-fetch` (don't assign)

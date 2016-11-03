@@ -1,16 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
-// import nock from 'nock';
-
 import * as actions from '../actions';
 
 const mockStore = configureMockStore([thunk])
 
 describe('async actions', () => {
 
-  // afterEach(() => nock.cleanAll());
-  afterEach(() => fetchMock.reset());
+  beforeEach(() => fetchMock.restore());
 
   it('creates FETCH_EXPENSES_SUCCESS when fetching expenses was done', () => {
     const items = [];
@@ -22,8 +19,37 @@ describe('async actions', () => {
       {type: actions.FETCH_EXPENSES_SUCCESS, items: items, pager: pager}
     ];
 
-    // nock('localhost').get('/api/expenses').reply(200, {body: {items, pager}});
     fetchMock.get('*', {status: 200, body: {pager, items}});
+
+    return store.dispatch(actions.fetchExpenses()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('creates FETCH_EXPENSES_ERROR when fetch expenses failed with 500', () => {
+    const store = mockStore();
+    const message = 'Server made a boo boo!';
+    const expectedActions= [
+      {type: actions.FETCH_EXPENSES_START},
+      {type: actions.FETCH_EXPENSES_ERROR, message}
+    ];
+
+    fetchMock.get('*', {status: 500, body: {message}});
+
+    return store.dispatch(actions.fetchExpenses()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('creates FETCH_EXPENSES_ERROR when fetch expenses failed with 400', () => {
+    const store = mockStore();
+    const message = 'Client was not nice!';
+    const expectedActions= [
+      {type: actions.FETCH_EXPENSES_START},
+      {type: actions.FETCH_EXPENSES_ERROR, message}
+    ];
+
+    fetchMock.get('*', {status: 400, body: {message}});
 
     return store.dispatch(actions.fetchExpenses()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);

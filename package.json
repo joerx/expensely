@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "test:server": "mocha src/server/__tests__",
+    "test:client": "jest",
     "migrate": "knex --cwd src/server/ migrate:latest",
     "seed": "knex --cwd src/server/ seed:run",
     "build": "webpack",

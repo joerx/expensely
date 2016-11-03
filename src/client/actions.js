@@ -1,4 +1,5 @@
-// import fetch from 'isomorphic-fetch';
+import 'isomorphic-fetch';
+// import request from 'request';
 
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
@@ -26,7 +27,7 @@ export function fetchExpensesStart() {
 export function fetchExpensesError(error) {
   return {
     type: FETCH_EXPENSES_ERROR,
-    error: error
+    message: error.message
   }
 };
 
@@ -40,13 +41,15 @@ export function fetchExpensesSuccess({items, pager}) {
 
 export function fetchExpenses() {
   return (dispatch) => {
+
+    const handleResponse = (res) => 
+      res.json().then((json) =>
+        res.ok ?
+          dispatch(fetchExpensesSuccess(json)) :
+          dispatch(fetchExpensesError(json))
+      );
+    
     dispatch(fetchExpensesStart()); // 1st - async action start
-    return fetch('http://localhost/api/expenses')
-      .then(response => response.json())
-      .then(json => dispatch(fetchExpensesSuccess(json))) // 2nd dispatch - async action end
-      .catch(err => {
-        console.log('ERROR', err);
-        fetchExpensesError(err)
-      });
+    return fetch('/api/expenses').then(handleResponse);
   }
 }
