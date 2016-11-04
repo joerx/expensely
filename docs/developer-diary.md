@@ -153,3 +153,8 @@ Problems:
 - Apparently nock as described in (http://redux.js.org/docs/recipes/WritingTests.html) doesn't work
 - Works with fetch-mock (https://github.com/wheresrhys/fetch-mock)
 - Must change `import fetch from 'isomorphic-fetch'` to `import isomorphic-fetch` (don't assign)
+
+### 9.3 Reducers
+
+- Most pleasant: pure functions, no side effects, minimal dependencies
+- Zero boilerplate, very straightforward tests
