@@ -7,17 +7,21 @@ const initialState = {
   fetching: false
 };
 
-function expenses(state=initialState.expenses, action) {
+/**
+ * Reducer handling the list of expenses - add, remove, fetch, etc.
+ */
+export function expenses(state=initialState.expenses, action) {
   switch(action.type) {
     case actions.ADD_EXPENSE: 
-      return state.expenses.concat({
+      return state.concat({
         item: action.item, 
         amount: action.amount
       });
 
     case actions.REMOVE_EXPENSE:
-      const newExpenses = [].concat(state.expenses);
-      const deleted = newExpenses.splice(action.index, 1)[0];
+      const newExpenses = [].concat(state);
+      const idx = newExpenses.indexOf(action.item)
+      newExpenses.splice(idx, 1);
       return newExpenses;
 
     case actions.RESET_EXPENSES:
@@ -31,7 +35,10 @@ function expenses(state=initialState.expenses, action) {
   }
 }
 
-function total(state=initialState.total, action) {
+/**
+ * Reducer handling the total amount of all expenses.
+ */
+export function total(state=initialState.total, action) {
   switch(action.type) {
     case actions.ADD_EXPENSE:
       return state + action.amount
@@ -47,7 +54,10 @@ function total(state=initialState.total, action) {
   }
 }
 
-function fetching(state=initialState.fetching, action) {
+/**
+ * Reducer handling the 'fetching' state for ongoing backend operations.
+ */
+export function fetching(state=initialState.fetching, action) {
   switch(action.type) {
     case actions.FETCH_EXPENSES_START:
       return true;
@@ -60,6 +70,9 @@ function fetching(state=initialState.fetching, action) {
   }
 }
 
+/**
+ * Combine all reducers
+ */
 const rootReducer = combineReducers({
   expenses,
   total,
