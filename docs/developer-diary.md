@@ -158,3 +158,39 @@ Problems:
 
 - Most pleasant: pure functions, no side effects, minimal dependencies
 - Zero boilerplate, very straightforward tests
+
+### 9.4 Components
+
+- Components should only depend on props, so should be easy to test as well
+- Using Enzyme (http://airbnb.io/enzyme/) to assert, traverse, manipulate components
+- Uses jQuery-style API for ease of use
+
+Preparation:
+
+- For compat additional deps must be explicitly defined (they're not in Enzymes `package.json`)
+- Explicitly adding `@^0.14.8` since we're using React `0.14`
+
+```
+npm i --save-dev react-addons-test-utils@^0.14.8
+npm i --save-dev react-dom@^0.14.8
+```
+
+Testing:
+
+- Render component into enzyme wrapper, than use that wrapper to traverse the component
+- Example:
+
+```js
+import {shallow} from 'enzyme';
+//...
+const wrapper = shallow(<MyComponent />);
+expect(wrapper.find('.some-class').length).toEqual(3);
+
+```
+
+- Note: when using `wrapper#contains()` it will need to match children
+- jQuery-style selectors for `find()` etc. seem to be more useful
+- Pro tip: use `wrapper#debug()` to render the tree in HTML-like syntax
+- Question: difference between shallow and full DOM rendering?
+- Writing lot of traversals/assertions could become tedious, hence 
+  [snapshot testing](https://facebook.github.io/jest/docs/tutorial-react.html#snapshot-testing)?

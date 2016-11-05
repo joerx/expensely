@@ -6,8 +6,8 @@ import printf from 'printf';
 // - onDelete()
 const ExpenseRow = ({label, amount, actionIcon, onActionClick}) => (
   <div className="expense-row">
-    {ucfirst(label)}
-    <span className="pull-right">{printf('%.2f S$', amount)}
+    <span className="expense-label">{ucfirst(label)}</span>
+    <span className="pull-right expense-amount">{printf('%.2f S$', amount)}
       <a onClick={onActionClick}>
         <span className={`glyphicon glyphicon-${actionIcon}`}/>
       </a>
