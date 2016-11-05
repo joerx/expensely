@@ -63,6 +63,7 @@ export function fetching(state=initialState.fetching, action) {
       return true;
 
     case actions.FETCH_EXPENSES_SUCCESS:
+    case actions.FETCH_EXPENSES_ERROR:
       return false;
 
     default:

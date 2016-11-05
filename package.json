@@ -11,7 +11,7 @@
     "seed": "knex --cwd src/server/ seed:run",
     "build": "webpack",
     "clean": "rm -rf dist",
-    "server": "node src/server/server.js",
+    "api-server": "node src/server/server.js",
     "dev-server": "webpack-dev-server --content-base=src/static"
   },
   "keywords": [
