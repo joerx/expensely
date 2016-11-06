@@ -15,6 +15,10 @@ function setup() {
 
 describe('Component ExpenseRow', () => {
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should render itself', () => {
     const {props, wrapper} = setup();
     expect(wrapper.find('.expense-row').length).toEqual(1);
@@ -29,6 +33,12 @@ describe('Component ExpenseRow', () => {
   it('should have the amount set', () => {
     const {props, wrapper} = setup();
     expect(wrapper.find('.expense-amount').at(0).text()).toMatch(/20.00/i);
+  });
+
+  it('should call the onActionClick handler when .row-action is clicked', () => {
+    const {props, wrapper} = setup();
+    wrapper.find('.row-action').at(0).simulate('click');
+    expect(props.onActionClick.mock.calls.length).toEqual(1);
   });
 
 });

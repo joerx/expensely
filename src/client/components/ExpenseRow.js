@@ -8,7 +8,7 @@ const ExpenseRow = ({label, amount, actionIcon, onActionClick}) => (
   <div className="expense-row">
     <span className="expense-label">{ucfirst(label)}</span>
     <span className="pull-right expense-amount">{printf('%.2f S$', amount)}
-      <a onClick={onActionClick}>
+      <a className="row-action" onClick={onActionClick}>
         <span className={`glyphicon glyphicon-${actionIcon}`}/>
       </a>
     </span>
