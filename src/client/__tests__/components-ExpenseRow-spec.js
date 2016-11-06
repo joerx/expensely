@@ -13,7 +13,7 @@ function setup() {
   return {props, wrapper};
 }
 
-describe('Component ExpenseRow', () => {
+describe('ExpenseRow component', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();

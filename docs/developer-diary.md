@@ -165,7 +165,7 @@ Problems:
 - Using Enzyme (http://airbnb.io/enzyme/) to assert, traverse, manipulate components
 - Uses jQuery-style API for ease of use
 
-Preparation:
+#### Preparation
 
 - For compat additional deps must be explicitly defined (they're not in Enzymes `package.json`)
 - Explicitly adding `@^0.14.8` since we're using React `0.14`
@@ -175,7 +175,7 @@ npm i --save-dev react-addons-test-utils@^0.14.8
 npm i --save-dev react-dom@^0.14.8
 ```
 
-Testing:
+#### Testing
 
 - Render component into enzyme wrapper, than use that wrapper to traverse the component
 - Example:
@@ -194,3 +194,67 @@ expect(wrapper.find('.some-class').length).toEqual(3);
 - Question: difference between shallow and full DOM rendering?
 - Writing lot of traversals/assertions could become tedious, hence 
   [snapshot testing](https://facebook.github.io/jest/docs/tutorial-react.html#snapshot-testing)?
+
+#### Shallow Rendering
+
+- Renders the given component but does not render it's children
+- Assertions can be made on the child components being present, but not on their content
+
+Example:
+
+```js
+import {shallow} from 'enzyme';
+const props = {expenses: [
+  {item: 'milk', amount: .5}
+]};
+const wrapper = shallow(<ExpenseList {...props}/>);
+expect(wrapper.find(ExpenseRow).length).toEqual(1); // will work
+expect(wrapper.find('.expense-row').length).toEqual(1); // will not work
+```
+
+Output of `wrapper.debug()`:
+
+```xml
+<section className="expense-list">
+<ExpenseRow amount={0.5} label="milk" />
+</section>
+```
+
+#### Full DOM Rendering:
+
+- Renders the component tree including all children
+- Allows assertions on childrens content as well
+
+Example:
+
+```js
+import {mount} from 'enzyme';
+const props = {expenses: [
+  {item: 'milk', amount: .5}
+]};
+const wrapper = mount(<ExpenseList {...props}/>);
+expect(wrapper.find(ExpenseRow).length).toEqual(1); // will work
+expect(wrapper.find('.expense-row').length).toEqual(1); // will also work
+```
+
+Output of `wrapper.debug()`:
+
+```xml
+<ExpenseList expenses={{...}}>
+  <section className="expense-list">
+    <ExpenseRow amount={0.5} label="milk">
+      <div className="expense-row">
+        <span className="expense-label">
+          Milk
+        </span>
+        <span className="pull-right expense-amount">
+          0.50 S$
+          <a className="row-action" onClick={[Function]}>
+            <span className="glyphicon glyphicon-trash" />
+          </a>
+        </span>
+      </div>
+    </ExpenseRow>
+  </section>
+</ExpenseList>
+```

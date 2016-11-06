@@ -5,20 +5,19 @@ import LoadingRow from './LoadingRow';
 // List of expenses
 // - expenses: array[expense]
 // - onHistoryItemDelete: fn(id)
-const ExpenseHistory = ({expenses, fetching, onItemDelete}) => {
-  console.log('fetching', fetching);
+const ExpenseList = ({expenses, fetching, onItemDelete}) => {
   if (fetching) {
-    return <section><LoadingRow/></section>    
+    return <section><LoadingRow/></section>;
   }
-  const list = expenses.map((e, idx) => (
+  const list = expenses.map((expense, idx) => (
     <ExpenseRow
       key={idx}
-      amount={e.amount}
-      label={e.item}
+      amount={expense.amount}
+      label={expense.item}
       actionIcon='trash'
-      onActionClick={_ => onItemDelete(idx)} />
+      onActionClick={_ => onItemDelete(expense)} />
   ));
-  return (<section className="expense-list">{list}</section>)
+  return <section className="expense-list">{list}</section>;
 }
 
-export default ExpenseHistory;
+export default ExpenseList;
