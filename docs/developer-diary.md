@@ -14,7 +14,7 @@ Demo: https://expensely.herokuapp.com/
 
 ### 1. Webpack
 
-- `npm install --save-dev webpack webpack-dev-server`
+- Webpack: `npm install --save-dev webpack webpack-dev-server`
 - Babel: `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react`
 - Build: `webpack`, then `open index.html`
 - Dev server `webpack-dev-server --inline`, then `open http://localhost:8080`
