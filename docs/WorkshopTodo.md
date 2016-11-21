@@ -1,6 +1,6 @@
 # WorkshopTodo
 
-- props vs state
+- props vs state - clearer explanation
 - sample app wireframes
 - container vs presentation
 - tests based on 0.5.0 (frontend, redux)
