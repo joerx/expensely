@@ -25,13 +25,20 @@ describe('ExpenseList component', () => {
     expect(wrapper.find('.expense-list').length).toEqual(1);
   });
 
+  // default, shallow rendering
   it('should render one child for each expense', () => {
     const {wrapper, props} = setup();
+    console.log('## Shallow Rendering:');
+    console.log(wrapper.debug());
     expect(wrapper.find(ExpenseRow).length).toEqual(props.expenses.length);
   });
 
+  // full DOM rendering
   it('should render the DOM for each child', () => {
-    const {props, wrapper} = setup(mount);
+    const {props} = setup();
+    const wrapper = mount(<ExpenseList {...props}/>);
+    console.log('## Full DOM Rendering:');
+    console.log(wrapper.debug());
     expect(wrapper.find('.expense-row').length).toEqual(props.expenses.length);
   });
 
