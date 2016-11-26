@@ -16,7 +16,7 @@ function setup() {
 describe('ExpenseRow component', () => {
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
   it('should render itself', () => {
