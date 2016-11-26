@@ -1,0 +1,19 @@
+exports[`ExpenseRow component should render itself 1`] = `
+<div
+  className="expense-row">
+  <span
+    className="expense-label">
+    Some label text
+  </span>
+  <span
+    className="pull-right expense-amount">
+    20.00 S$
+    <a
+      className="row-action"
+      onClick={[Function]}>
+      <span
+        className="glyphicon glyphicon-ok" />
+    </a>
+  </span>
+</div>
+`;
