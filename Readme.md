@@ -9,15 +9,29 @@ Demo: https://expensely.herokuapp.com/
 
 ## Configuration
 
-- PG_URL, e.g. 'tcp://user:pass@hostname/dbname'
+- Set PG_URL, e.g. 'tcp://user:pass@hostname/dbname'
 
-## Dev Server
+## Tests
 
-- Backend: nodejs app, `node api-server.js`, http://localhost:3000
-- Frontend: webpack dev server `npm run dev-server`, http://localhost:8080
+### Backend
+
+- Create database in Postgres, see [docs/Postgres.md](docs/Postgres.md)
+- Run `source setenv-test.sh` for dev database
+- Run `npm run test:backend` to server tests
+
+### Frontend
+
+- Run `npm run test:frontend` for frontend tests (No database needed)
+
+## Development Environment
+
+- Create database in Postgres, see [docs/Postgres.md](docs/Postgres.md)
+- Run `source setenv-dev.sh` for dev database
+- Backend: nodejs app, `npm run backend`, http://localhost:3000
+- Frontend: webpack dev server `npm run frontend`, http://localhost:8080
 - Uses dev server proxy option on `/api` to access backend API
 
-### Vagrant
+## Vagrant
 
 - Backend should run fine inside Vagrant box
 - Frontend - need `--watch-poll` and `--host` params with `webpack-dev-server`
@@ -28,6 +42,6 @@ Demo: https://expensely.herokuapp.com/
 webpack-dev-server --watch-poll --host 0.0.0.0 --content-base public/
 ```
 
-### Docker
+## Docker
 
 TODO

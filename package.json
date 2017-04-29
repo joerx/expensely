@@ -5,14 +5,15 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test:server": "mocha src/server/__tests__",
-    "test:client": "jest",
+    "test:backend": "mocha src/server/__tests__",
+    "test:frontend": "jest",
+    "test": "npm run test:backend && npm run test:frontend",
     "migrate": "knex --cwd src/server/ migrate:latest",
     "seed": "knex --cwd src/server/ seed:run",
     "build": "webpack",
     "clean": "rm -rf dist",
-    "api-server": "node src/server/server.js",
-    "dev-server": "webpack-dev-server --content-base=src/static"
+    "backend": "node src/server/server.js",
+    "frontend": "webpack-dev-server --content-base=src/static"
   },
   "keywords": [
     "webpack",

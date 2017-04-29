@@ -10,8 +10,9 @@ createdb expensely_test
 
 ## list dbs, tables
 
-dbs: \l
-tables: \dt
+dbs: `\l`
+change db: `\connect <db_name>`
+tables: `\dt`
 
 ## list roles
 
@@ -19,12 +20,19 @@ tables: \dt
 
 ## create role
 
+```
 create user vagrant
+```
 
 ## alter role (set password)
 
-alter role vagrant password 'vagrant'
+```
+alter role vagrant password 'vagrant';
+```
 
 ## grant
 
+```
 GRANT ALL PRIVILEGES ON DATABASE expensely_test to vagrant;
+```
+
