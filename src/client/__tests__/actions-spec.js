@@ -13,5 +13,5 @@ describe('action', () => {
     };
 
     expect(actions.addExpense(item, amount)).toEqual(expected);
-  })
-})
+  });
+});
