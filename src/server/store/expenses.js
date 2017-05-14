@@ -22,7 +22,8 @@ const validate = (expense) => {
 
 const store = module.exports = (db) => {
 
-  const store = {};
+  // Create new object to hold exported properties, inherit default props
+  const store = Object.create(defaults);
 
   /**
    * Find all expenses from database, optionally accepts a pager object and additional filter
