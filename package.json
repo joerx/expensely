@@ -1,11 +1,11 @@
 {
-  "name": "react-expense-tracker",
+  "name": "expensely",
   "version": "0.7.0",
   "description": "",
   "main": "src/server/index.js",
   "private": true,
   "scripts": {
-    "test:backend": "mocha src/server/__tests__",
+    "test:backend": "NODE_ENV=test mocha src/server/__tests__",
     "test:frontend": "jest",
     "test": "npm run test:backend && npm run test:frontend",
     "migrate": "knex --cwd src/server/ migrate:latest",
