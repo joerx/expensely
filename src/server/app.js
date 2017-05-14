@@ -43,7 +43,7 @@ app.get('/api/expenses', (req, res, next) => {
       res.status(200).json(result);
     })
     .catch(err => {
-      next()
+      next();
     });
 });
 
@@ -52,6 +52,7 @@ app.use((req, res, next) => {
   next(error.NotFound());
 });
 
+// Error handler
 app.use((err, req, res, next) => {
   if (process.env.NODE_ENV !== 'test') {
     console.error(err.stack || err);
