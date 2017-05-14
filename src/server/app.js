@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const knex = require('knex');
 const error = require('http-errors');
+const pkg = require('../../package.json');
 
 const expensesStore = require('./store/expenses');
 const config = require('./configure');
@@ -33,7 +34,16 @@ app.get('/', (req, res) => {
 
 // index endpoint
 app.get('/api', (req, res) => {
-  res.status(200).json({msg: 'ok'});
+  res.status(200).json({
+    msg: 'ok',
+    version: pkg.version
+  });
+});
+
+app.get('/api/debug', (req, res) => {
+  res.status(200).json({
+    headers: req.headers
+  })
 });
 
 // GET expenses
