@@ -12,8 +12,8 @@
     "seed": "knex --cwd src/server/ seed:run",
     "build": "rm -rf dist && webpack",
     "backend": "node src/server",
-    "frontend": "webpack-dev-server --content-base=src/static",
-    "watch:backend": "nodemon src/server"
+    "backend:dev": "npm run migrate && nodemon src/server",
+    "frontend": "webpack-dev-server --content-base=src/static"
   },
   "keywords": [
     "webpack",

@@ -2,7 +2,16 @@
 
 Demo: https://expensely.herokuapp.com/
 
-## Requirements
+## Via Docker Compose
+
+- Build dist files: `npm install && npm run build`
+- Start app: `docker-compose up`
+- Optional run db seed: `docker-compose run backend npm run seed`
+- Building first is needed since `./` is shared with all containers
+
+## Standalone
+
+### Development
 
 - Frontend: Node >= v4.4.5, NPM
 - Backend: Node >= v6.9.1, PostGres ^9.4.9

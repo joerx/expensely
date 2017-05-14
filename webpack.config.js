@@ -1,3 +1,4 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 module.exports = {
@@ -21,6 +22,11 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      {from: './src/static/', to: '.'} // target is relative to output path
+    ])
+  ],
   devServer: {
     // Proxy API calls, API server must be running on localhost:3000
     // You can run it in Vagrant/Docker, just forward ports accordingly
