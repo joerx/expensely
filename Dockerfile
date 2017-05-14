@@ -13,6 +13,8 @@ RUN npm run build
 
 RUN chown app:app /code/*
 
+VOLUME /code/dist
+
 USER app
 
 CMD ["npm", "run", "backend"]

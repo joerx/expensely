@@ -13,7 +13,7 @@
     "build": "rm -rf dist && webpack",
     "backend": "node src/server",
     "backend:dev": "npm run migrate && nodemon src/server",
-    "frontend": "webpack-dev-server --content-base=src/static"
+    "frontend:dev": "webpack-dev-server --content-base=src/static"
   },
   "keywords": [
     "webpack",
@@ -37,6 +37,7 @@
     "babel-preset-react": "^6.5.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.0",
     "enzyme": "^2.5.1",
     "fetch-mock": "^5.5.0",

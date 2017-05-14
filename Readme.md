@@ -4,10 +4,9 @@ Demo: https://expensely.herokuapp.com/
 
 ## Via Docker Compose
 
-- Build dist files: `npm install && npm run build`
 - Start app: `docker-compose up`
 - Optional run db seed: `docker-compose run backend npm run seed`
-- Building first is needed since `./` is shared with all containers
+- Run webpack dev server on your host: `npm run frontend:dev`
 
 ## Standalone
 
