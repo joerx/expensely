@@ -10,10 +10,10 @@
     "test": "npm run test:backend && npm run test:frontend",
     "migrate": "knex --cwd src/server/ migrate:latest",
     "seed": "knex --cwd src/server/ seed:run",
-    "build": "webpack",
-    "clean": "rm -rf dist",
+    "build": "rm -rf dist && webpack",
     "backend": "node src/server",
-    "frontend": "webpack-dev-server --content-base=src/static"
+    "frontend": "webpack-dev-server --content-base=src/static",
+    "watch:backend": "nodemon src/server"
   },
   "keywords": [
     "webpack",
@@ -44,6 +44,7 @@
     "jest": "^17.0.3",
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
+    "nodemon": "^1.11.0",
     "printf": "^0.2.3",
     "react": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
