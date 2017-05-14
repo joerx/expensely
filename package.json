@@ -2,7 +2,7 @@
   "name": "react-expense-tracker",
   "version": "0.7.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server/index.js",
   "private": true,
   "scripts": {
     "test:backend": "mocha src/server/__tests__",
@@ -12,7 +12,7 @@
     "seed": "knex --cwd src/server/ seed:run",
     "build": "webpack",
     "clean": "rm -rf dist",
-    "backend": "node src/server/server.js",
+    "backend": "node src/server",
     "frontend": "webpack-dev-server --content-base=src/static"
   },
   "keywords": [
