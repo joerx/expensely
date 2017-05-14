@@ -35,16 +35,16 @@ module.exports = {
     loaders: [
       // css loader
       {
-        test: /\.css$/, 
+        test: /\.css$/,
         loader: 'style!css'
       },
       // js loader with babel
       {
-        test: /\.js$/, 
-        loader: 'babel', 
+        test: /\.js$/,
+        loader: 'babel',
         query: {
           presets: ['react', 'es2015']
-        }, 
+        },
         exclude: /node_modules/
       }
     ]
@@ -192,7 +192,7 @@ expect(wrapper.find('.some-class').length).toEqual(3);
 - jQuery-style selectors for `find()` etc. seem to be more useful
 - Pro tip: use `wrapper#debug()` to render the tree in HTML-like syntax
 - Question: difference between shallow and full DOM rendering?
-- Writing lot of traversals/assertions could become tedious, hence 
+- Writing lot of traversals/assertions could become tedious, hence
   [snapshot testing](https://facebook.github.io/jest/docs/tutorial-react.html#snapshot-testing)?
 
 #### Shallow Rendering
@@ -258,3 +258,52 @@ Output of `wrapper.debug()`:
   </section>
 </ExpenseList>
 ```
+
+## Docker
+
+- Create Dockerfile, docker-compose file to run app in development and prod
+- General architecture:
+    - Web container as proxy and to server static files/generated frontend assets
+    - App container running the backend (can also serve static assets)
+    - Database container
+- Webpack dev server can run standalone on host, connect to backend via proxy
+
+### Needs Improvement
+
+- Currently just `docker-compose` up will not start a working app
+- Need to run build, seeds manually (migrations are run on startup)
+- Fix build: include build files in backend container, share with nginx
+
+### NPM Caveats
+
+#### Install Dev Dependencies?
+
+- When NODE_ENV=production, npm will not install devDependencies
+- Image size:
+    - With dev dependencies: ~175 MB
+    - Without dev dependencies: ~87 MB
+- But without dev dependencies:
+  - How to build static assets?
+  - Can't run test in packaged container
+- Conclusion: even difference is significat, does it warrant a much more complex setup with
+  multiple and/or parameterised Dockerfiles?
+
+#### Cache Dependencies
+
+- Naive approach, will re-run npm install every time a file changes:
+
+```
+COPY ./ /code
+WORKDIR /code
+RUN npm install
+```
+
+- Better approach: install deps first, then copy code, use Dockers layer caching
+
+```
+COPY package.json /code
+WORKDIR /code
+RUN npm install
+COPY ./ /code
+```
+
