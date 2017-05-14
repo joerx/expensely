@@ -38,12 +38,13 @@ app.get('/api', (req, res) => {
 
 // GET expenses
 app.get('/api/expenses', (req, res, next) => {
+  // res.status(200).json({hello: 'world'});
   expenses.findAll()
     .then(result => {
       res.status(200).json(result);
     })
     .catch(err => {
-      next();
+      next(err);
     });
 });
 
@@ -54,12 +55,13 @@ app.use((req, res, next) => {
 
 // Error handler
 app.use((err, req, res, next) => {
-  if (process.env.NODE_ENV !== 'test') {
-    console.error(err.stack || err);
-  }
 
   const status = err.status || 500;
   const message = err.message || 'Internal Sever Error';
+
+  if (process.env.NODE_ENV !== 'test' && status >= 500) {
+    console.error(err.stack || err);
+  }
 
   res.status(status).json({message});
 });

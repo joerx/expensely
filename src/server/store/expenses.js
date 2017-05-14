@@ -1,15 +1,12 @@
 'use strict';
 
 const uuid = require('uuid');
-const DefaultStore = require('./defaults');
+const defaults = require('./defaults');
+const utils = require('./utils');
 const error = require('http-errors');
 
 const TABLE = 'expenses';
 const FIELDS = ['id', 'item', 'amount', 'date', 'created_at', 'updated_at'];
-
-const store = module.exports = (db) => {
-  return new ExpensesStore(db);
-}
 
 const validate = (expense) => {
   if (!expense.item || typeof expense.item !== 'string') {
@@ -23,42 +20,50 @@ const validate = (expense) => {
   }
 }
 
-class ExpensesStore extends DefaultStore {
+const store = module.exports = (db) => {
 
-  constructor(db) {
-    super(db);
-  }
+  const store = {};
 
-  findAll(options) {
+  /**
+   * Find all expenses from database, optionally accepts a pager object and additional filter
+   * options.
+   */
+  store.findAll = (options) => {
     options = options || {};
 
-    const pager = options.pager || {page: 1, pageSize: this.PAGE_SIZE};
+    const pager = options.pager || {page: 1, pageSize: defaults.PAGE_SIZE};
     const offset = (pager.page-1)*pager.pageSize;
 
-    const q = this
+    const query = db
       .table(TABLE)
       .select(FIELDS)
       .limit(pager.pageSize)
       .offset(offset);
 
     if (options && options.after) {
-      q.where('date', '>=', options.after)
+      query.where('date', '>=', options.after)
     }
 
-    return q.then(items => {
-      return {items, pager};
-    });
+    return query
+      .then(items => ({items, pager}))
+      .catch(utils.translateDbError)
   }
 
-  insert(data) {
+  /**
+   * Insert new record into database
+   */
+  store.insert = (data) => {
     data.id = uuid.v4();
 
-    let err = validate(data);
+    const err = validate(data);
     if (err) return Promise.reject(err);
 
-    return this.table(TABLE)
+    return db.table(TABLE)
       .insert(data)
       .returning(FIELDS)
-      .then(r => r[0]);
+      .then(r => r[0])
+      .catch(utils.translateDbError)
   }
+
+  return store;
 }
